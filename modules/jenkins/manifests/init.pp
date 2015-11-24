@@ -12,14 +12,17 @@ class jenkins {
 
   #Below are the packages needed in order for jenkins to be installed
 
-  package { 'wget':
-    ensure => installed,
+  if ! defined(Package['wget']) {
+    package { 'wget':
+      ensure => installed,
+    }
   }
 
-  package { 'java':
-    ensure => installed,
+  if ! defined(Package['java']) {
+    package { 'java':
+      ensure => installed,
+    }
   }
-
 
   #Executes 
 
@@ -48,9 +51,9 @@ class jenkins {
     notify  => Exec['install_jenkins'],
   }
 
-  exec {'install_jenkins'
+  exec {'install_jenkins':
     user    => 'root',
-    command => 'sudo apt-get install jenkins',
+    command => 'sudo apt-get install -y jenkins',
   }
 
 }
