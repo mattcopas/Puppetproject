@@ -1,0 +1,64 @@
+# sets vagrant version
+Vagrant.configure(2) do |config|
+
+  # sets base box with a variable name for identification NOTE: the box auto sets HD size to 40Gb
+  config.vm.define "cluster_1_Master" do |cluster_1_Master|
+    cluster_1_Master.vm.box = "ubuntu/trusty64"
+    cluster_1_Master.vm.network "public_network"
+    # executes shell file to run bash terminal and comands
+    cluster_1_Master.vm.provision :shell, path: "ubuntuBashMaster.sh"
+      # configures VM
+      cluster_1_Master.vm.provider :virtualbox do |master|
+        master.memory = 3072
+        master.name   = "Cluster 1 Master"
+        master.gui    = true
+      end
+
+  end
+
+    # sets base box with a variable name for identification
+  config.vm.define "cluster_2" do |cluster_2|
+    cluster_2.vm.box = "ubuntu/trusty64"
+    cluster_2.vm.network "public_network"
+    # executes shell file to run bash terminal and comands
+    cluster_2.vm.provision :shell, path: "ubuntuBash.sh"
+      # configures VM
+      cluster_2.vm.provider :virtualbox do |c2|
+        c2.memory = 2048
+        c2.name   = "Cluster 2 Agent"
+        c2.gui    = true
+      end
+
+  end
+
+     # sets base box with a variable name for identification
+  config.vm.define "cluster_3" do |cluster_3|
+    cluster_3.vm.box = "puphpet/centos65-x64"
+    cluster_3.vm.network "public_network"
+    # executes shell file to run bash terminal and comands
+    cluster_3.vm.provision :shell, path: "centOSBash.sh"
+      # configures VM
+      cluster_3.vm.provider :virtualbox do |c3|
+        c3.memory = 2048
+        c3.name   = "Cluster 3 Agent"
+        c3.gui    = true
+      end
+
+  end
+
+        # sets base box with a variable name for identification
+  config.vm.define "cluster_4" do |cluster_4|
+    cluster_4.vm.box = "ubuntu/trusty64"
+    cluster_4.vm.network "public_network"
+    # executes shell file to run bash terminal and comands
+    cluster_4.vm.provision :shell, path: "ubuntuBash.sh"
+      # configures VM
+      cluster_4.vm.provider :virtualbox do |c4|
+        c4.memory = 2048
+        c4.name   = "Cluster 4 Agent-Manual testing"
+        c4.gui    = true
+      end
+
+  end
+
+end
