@@ -1,6 +1,6 @@
 # 
-class default-jdk {
-  package {
+class java {
+  package 'default-jdk' {
     ensure => 'installed',
   }
 }
