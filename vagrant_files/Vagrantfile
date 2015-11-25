@@ -30,21 +30,21 @@ Vagrant.configure(2) do |config|
       end
 
   end
-
+### DOWNLOAD SPEEDS TOO SLOW FOR CENTOS
      # sets base box with a variable name for identification
-  config.vm.define "cluster_3" do |cluster_3|
-    cluster_3.vm.box = "puphpet/centos65-x64"
-    cluster_3.vm.network "public_network"
-    # executes shell file to run bash terminal and comands
-    cluster_3.vm.provision :shell, path: "centOSBash.sh"
-      # configures VM
-      cluster_3.vm.provider :virtualbox do |c3|
-        c3.memory = 2048
-        c3.name   = "Cluster 3 Agent"
-        c3.gui    = true
-      end
-
-  end
+#  config.vm.define "cluster_3" do |cluster_3|
+#    cluster_3.vm.box = "puphpet/centos65-x64"
+#    cluster_3.vm.network "public_network"
+#    # executes shell file to run bash terminal and comands
+#    cluster_3.vm.provision :shell, path: "centOSBash.sh"
+#      # configures VM
+#      cluster_3.vm.provider :virtualbox do |c3|
+#        c3.memory = 2048
+#        c3.name   = "Cluster 3 Agent"
+#        c3.gui    = true
+#      end
+#
+#  end
 
         # sets base box with a variable name for identification
   config.vm.define "cluster_4" do |cluster_4|
