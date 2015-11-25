@@ -5,3 +5,6 @@ sudo apt-get update
 sudo apt-get install -y openssh-client
 sudo apt-get install -y openssh-server
 sudo apt-get install -y puppet
+
+# disables the firewall so that putty can connect
+sudo ufw disable

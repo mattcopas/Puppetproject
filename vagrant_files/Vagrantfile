@@ -4,37 +4,54 @@ Vagrant.configure(2) do |config|
   # sets base box with a variable name for identification NOTE: the box auto sets HD size to 40Gb
   config.vm.define "cluster_1_Master" do |cluster_1_Master|
     cluster_1_Master.vm.box = "ubuntu/trusty64"
-    cluster_1_Master.vm.network "public_network"
-    # executes shell file to run bash terminal and comands
-    cluster_1_Master.vm.provision :shell, path: "ubuntuBashMaster.sh"
+    cluster_1_Master.vm.network "public_network", ip: "192.168.200.200"
+    cluster_1_Master.vm.hostname = "masterEvilcorp.evilcorp.com"
       # configures VM
       cluster_1_Master.vm.provider :virtualbox do |master|
         master.memory = 3072
         master.name   = "Cluster 1 Master"
         master.gui    = true
       end
+    # executes shell file to run bash terminal and comands
+    cluster_1_Master.vm.provision :shell, path: "ubuntuBashMaster.sh"
+    cluster_1_Master.vm.provision :shell, path: "ubuntuBash_master_ipconfig.sh"
+    # modifies puppet.conf to set master autosigning of certs. NEVER USE IN PRODUCTION ENVIRONMENT
+    cluster_1_Master.vm.provision :shell, path: "ubuntuBashMaster_puppet_conf.sh"
+    # Pulls the repository from git and places the modules into /etc/puppet/modules
+    cluster_1_Master.vm.provision :shell, path: "ubuntuBashMaster_git.sh"
+    # creates the site.pp file EDIT WHEN ADDING NEW VMs
+    cluster_1_Master.vm.provision :shell, path: "ubuntuBashMaster_sitepp.sh"
 
   end
 
     # sets base box with a variable name for identification
   config.vm.define "cluster_2" do |cluster_2|
     cluster_2.vm.box = "ubuntu/trusty64"
-    cluster_2.vm.network "public_network"
-    # executes shell file to run bash terminal and comands
-    cluster_2.vm.provision :shell, path: "ubuntuBash.sh"
+    cluster_2.vm.network "public_network", ip: "192.168.200.201"
+    cluster_2.vm.hostname = "agent1Evilcorp.evilcorp.com"
       # configures VM
       cluster_2.vm.provider :virtualbox do |c2|
         c2.memory = 2048
         c2.name   = "Cluster 2 Agent"
         c2.gui    = true
       end
+    # executes shell file to run bash terminal and comands
+    cluster_2.vm.provision :shell, path: "ubuntuBash.sh"
+    cluster_2.vm.provision :shell, path: "ubuntuBash_agent_1_ipconfig.sh"
+    # create a certificate key which is sent to the server, server name in file:
+    cluster_2.vm.provision :shell, path: "ubuntuBash_puppet_cert_gen.sh"
+    # enables agent
+    cluster_2.vm.provision :shell, path: "ubuntuBash_enable.sh"
+    # initial pull of modules from master
+    cluster_2.vm.provision :shell, path: "ubuntuBash_firstrun.sh"
 
   end
 ### DOWNLOAD SPEEDS TOO SLOW FOR CENTOS
      # sets base box with a variable name for identification
 #  config.vm.define "cluster_3" do |cluster_3|
 #    cluster_3.vm.box = "puphpet/centos65-x64"
-#    cluster_3.vm.network "public_network"
+#    cluster_3.vm.network "public_network", ip: "192.168.200.202"
+#    cluster_3.vm.hostname = "agent2Evilcorp"
 #    # executes shell file to run bash terminal and comands
 #    cluster_3.vm.provision :shell, path: "centOSBash.sh"
 #      # configures VM
@@ -49,15 +66,23 @@ Vagrant.configure(2) do |config|
         # sets base box with a variable name for identification
   config.vm.define "cluster_4" do |cluster_4|
     cluster_4.vm.box = "ubuntu/trusty64"
-    cluster_4.vm.network "public_network"
-    # executes shell file to run bash terminal and comands
-    cluster_4.vm.provision :shell, path: "ubuntuBash.sh"
+    cluster_4.vm.network "public_network", ip: "192.168.200.203"
+    cluster_4.vm.hostname = "agent3Evilcorp.evilcorp.com"
       # configures VM
       cluster_4.vm.provider :virtualbox do |c4|
         c4.memory = 2048
         c4.name   = "Cluster 4 Agent-Manual testing"
         c4.gui    = true
       end
+    # executes shell file to run bash terminal and comands
+    cluster_4.vm.provision :shell, path: "ubuntuBash.sh"
+    cluster_4.vm.provision :shell, path: "ubuntuBash_agent_3_ipconfig.sh"
+    # create a certificate key which is sent to the server, server name in file:
+    cluster_4.vm.provision :shell, path: "ubuntuBash_puppet_cert_gen.sh"
+    # enables agent
+    cluster_4.vm.provision :shell, path: "ubuntuBash_enable.sh"
+    # initial pull of modules from master
+    cluster_4.vm.provision :shell, path: "ubuntuBash_firstrun.sh"
 
   end
 
