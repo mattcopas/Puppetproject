@@ -23,6 +23,7 @@ class jira {
     user    => root,
     cwd     => '/opt/jirainstall/',
     command => 'wget http://192.168.1.17/jira.bin', #takes the jira file from phils server
+	timeout => 0,
     before  => Exec['jira_chmod'],
   }
 
