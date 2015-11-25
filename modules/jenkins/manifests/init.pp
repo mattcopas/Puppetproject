@@ -15,45 +15,46 @@ class jenkins {
   if ! defined(Package['wget']) {
     package { 'wget':
       ensure => installed,
+      before => Package['default-jre'],
     }
   }
 
-  if ! defined(Package['java']) {
-    package { 'java':
+  if ! defined(Package['default-jre']) {
+    package { 'default-jre':
       ensure => installed,
+      before => Exec['download_jenkins_key'],
     }
   }
 
-  #Executes 
+  #Executes
 
-  exec {'create_directory_jenkins':
-    cwd     => '/opt/',
-    command => 'mkdir jenkins/',
-    notify  => Exec['download_jenkins'],
+  exec {'download_jenkins_key':
+    user    => root,
+    command => 'wget -q -O - https://jenkins-ci.org/debian/jenkins-ci.org.key | apt-key add -',
+    before  => Exec['echo_jenkins_source'],
   }
 
-  exec {'download_jenkins':
-    cwd     => '/opt/jenkins/',
-    user    => 'root',
-    command => 'wget -q -O - https://jenkins-ci.org/debian/jenkins-ci.org.key | sudo apt-key add -',
-    timeout => 0,
-    notify  => Exec['echo_jenkins'],
+  exec {'echo_jenkins_source':
+    user    => root,
+    command => "sh -c 'echo deb http://pkg.jenkins-ci.org/debian binary/ > /etc/apt/sources.list.d/jenkins.list'",
+    before  => Exec['apt_update'],
   }
 
-  exec {'echo_jenkins':
-    command => "sudo sh -c 'echo deb http://pkg.jenkins-ci.org/debian binary/ > /etc/apt/sources.list.d/jenkins.list'",
-    notify  => Exec['update_jenkins'],
+  exec { 'apt_update':
+    user    => root,
+    command => 'apt-get update',
+    before  => Package['jenkins'],
   }
 
-  exec {'update_jenkins':
-    user    => 'root',
-    command => 'sudo apt-get update',
-    notify  => Exec['install_jenkins'],
+  package { 'jenkins':
+      ensure => installed,
   }
 
-  exec {'install_jenkins':
-    user    => 'root',
-    command => 'sudo apt-get install -y jenkins',
-  }
+
+#  exec {'install_jenkins':
+#    user    => root,
+#    command => 'apt-get install -y jenkins',
+#    timeout => 0,
+#  }
 
 }
