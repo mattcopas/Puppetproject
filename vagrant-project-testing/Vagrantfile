@@ -1,0 +1,30 @@
+Vagrant.configure("2") do |o|
+
+	vmName 		   = 'Test node'
+
+	puppetAgent    = 'test-agent.local'
+	#puppetAgentIp  = ''
+
+	puppetMaster   = 'phil-Master.local'
+	puppetMasterIp = '192.168.1.32'
+
+	o.vm.provider "virtualbox" do |v|
+		v.customize ["modifyvm", :id, "--memory", 1024]
+		v.name = vmName
+	end
+	#			node.vm.box = "ubuntu/trusty64"
+	o.vm.box = "box-cutter/ubuntu1404-desktop"
+	
+	
+	o.vm.provision :shell, path: "bootstrap.sh"
+	
+	o.vm.provision :shell, inline: "echo '"+puppetAgent+"' > /etc/hostname"
+	o.vm.provision :shell, inline: "hostname "+puppetAgent
+	o.vm.provision :shell, inline: "echo '" + puppetMasterIp + " " + puppetMaster + "' > /etc/hosts"
+	#o.vm.provision :shell, inline: "echo '" + puppetAgentIp + " " + puppetAgent + "' >> /etc/hosts"
+	o.vm.provision :shell, inline: "echo '127.0.0.1 " + puppetAgent + " localhost' >> /etc/hosts"
+	o.vm.provision :shell, inline: "echo '127.0.1.1 " + puppetAgent + "' >> /etc/hosts"
+
+	o.vm.synced_folder "C:\\vagrant-shared", "/vagrant-shared"
+
+end
