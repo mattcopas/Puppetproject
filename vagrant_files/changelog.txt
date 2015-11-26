@@ -1,0 +1,15 @@
+Version 1.2.1
+  - Fixed CentOS script incorrectly echo'ed an invalid parameter to the puppet.conf file.
+
+Version 1.2.0
+  - All ubuntu agents can be manually triggered to poll and pull from the master
+  - All ubuntu agents auto poll the master every 5 minutes for an update
+  - centOS requires testing
+
+Version 1.1.0
+  - CentOS agent now generates a certificate which is signed by the master
+
+Version 1.0.0
+  - Ubuntu master auto signs all certificates from the Ubuntu agents
+  - Agents pull modules from the master which are specific to their node
+     - Node definitions found in 'UbuntuBashMaster_sitepp.sh'

@@ -20,7 +20,6 @@ sudo echo '# These are needed when the puppetmaster is run by passenger' >> /etc
 sudo echo '# and can safely be removed if webrick is used' >> /etc/puppet/puppet.conf
 sudo echo 'ssl_client_header = SSL_CLIENT_S_DN' >> /etc/puppet/puppet.conf
 sudo echo 'ssl_client_verify_header = SSL_CLIENT_VERIFY' >> /etc/puppet/puppet.conf
-sudo echo 'autosign = true' >> /etc/puppet/puppet.conf
 
 sudo echo '[agent]' >> /etc/puppet/puppet.conf
 sudo echo 'runinterval = 5m' >> /etc/puppet/puppet.conf
