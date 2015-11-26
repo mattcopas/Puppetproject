@@ -13,6 +13,7 @@ class jira {
   }
 
   exec { 'jira_mkdir':
+    unless  => 'test -e /opt/jirainstall',
     user    => root,
     cwd     => '/opt/',
     command => 'mkdir jirainstall',
@@ -20,10 +21,11 @@ class jira {
   }
 
   exec { 'jira_wget':
+    unless  => 'test -f /opt/jirainstall/jira.bin',
     user    => root,
     cwd     => '/opt/jirainstall/',
-    command => 'wget http://192.168.1.17/jira.bin', #takes the jira file from phils server
-	timeout => 0,
+    command => 'wget http://192.168.1.17/jira.bin', #takes the jira file from phils $
+    timeout => 0,
     before  => Exec['jira_chmod'],
   }
 
@@ -31,14 +33,21 @@ class jira {
     user    => root,
     cwd     => '/opt/jirainstall/',
     command => 'chmod a+x jira.bin',
-    before  => Exec['jira_execute'],
+    before  => Exec['kill_jira'],
 
   }
 
+  exec { 'kill_jira':
+    unless  => 'pgrep -f "jira"',
+    command => 'pkill jira',
+    notify  => Exec['jira_execute'],
+  }
+
   exec { 'jira_execute':
+    unless  => 'pgrep -f "jira"',
     user    => root,
     cwd     => '/opt/jirainstall/',
-    command => 'printf "\n2\n\n\n2\n8092\n8012\n\n" | ./jira.bin', #the ports may have to be changed
+    command => 'printf "\n2\n\n\n2\n8092\n8012\n\n" | ./jira.bin', #the ports may ha$
     #before  => Service['jira'],
   }
 
