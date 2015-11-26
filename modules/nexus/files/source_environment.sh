@@ -1,2 +1,2 @@
 #!/bin/bash
-soruce /etc/environment
+source /etc/environment
