@@ -21,6 +21,7 @@ class jira {
   }
 
   exec { 'jira_wget':
+    # Check if file already exists
     unless  => 'test -f /opt/jirainstall/jira.bin',
     user    => root,
     cwd     => '/opt/jirainstall/',
@@ -38,12 +39,14 @@ class jira {
   }
 
   exec { 'kill_jira':
+    # Check if jira process is running
     unless  => 'pgrep -f "jira"',
     command => 'pkill jira',
     notify  => Exec['jira_execute'],
   }
 
   exec { 'jira_execute':
+    # Check if jira process is running
     unless  => 'pgrep -f "jira"',
     user    => root,
     cwd     => '/opt/jirainstall/',
