@@ -1,4 +1,8 @@
 class jenkins {
+  
+  #------------------------------------------------------------------
+  # Path   
+  #------------------------------------------------------------------
 
   Exec {
     path => [
@@ -10,27 +14,31 @@ class jenkins {
     logoutput => true,
   }
 
+  #------------------------------------------------------------------
   #Below are the packages needed in order for jenkins to be installed
+  #------------------------------------------------------------------
 
   if ! defined(Package['wget']) {
     package { 'wget':
       ensure => installed,
-      before => Package['default-jre'],
+      before => Package['default-java'],
     }
   }
 
-  if ! defined(Package['default-jre']) {
-    package { 'default-jre':
-      ensure => installed,
-      before => Exec['download_jenkins_key'],
-    }
-  }
+  #------------------------------------------------------------------
+  #Executables
+  #------------------------------------------------------------------
 
-  #Executes
-  
   if $operatingsystem == 'Ubuntu' {
 
     #Ubuntu
+
+      if ! defined(Package['default-java']) {
+        package { 'default-jre':
+        ensure => installed,
+        before => Exec['download_jenkins_key'],
+        }
+      }   
 
       exec {'download_jenkins_key':
         user    => root,
@@ -54,6 +62,13 @@ class jenkins {
 
     #CentOS
 
+      if ! defined(Package['java-1.7.0-openjdk']) {
+        package { 'java-1.7.0-openjdk':
+          ensure => installed,
+          before => Exec['download_jenkins_key'],
+        }
+      }   
+
       exec {'download_jenkins_key':
         user    => root,
         command => 'wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat/jenkins.repo',
@@ -63,12 +78,6 @@ class jenkins {
       exec {'jenkins_source':
         user    => root,
         command => "rpm --import https://jenkins-ci.org/redhat/jenkins-ci.org.key",
-        before  => Exec['jenkins_update'],
-      }
-    
-      exec { 'jenkins_update':
-        user    => root,
-        command => 'yum update',
         before  => Package['jenkins'],
       }
     
@@ -77,7 +86,7 @@ class jenkins {
   }
 
   package { 'jenkins':
-      ensure => installed,
+    ensure => installed,
   }
 
 }
