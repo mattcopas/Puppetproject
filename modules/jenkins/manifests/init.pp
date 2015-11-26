@@ -27,34 +27,57 @@ class jenkins {
   }
 
   #Executes
+  
+  if $operatingsystem == 'Ubuntu' {
 
-  exec {'download_jenkins_key':
-    user    => root,
-    command => 'wget -q -O - https://jenkins-ci.org/debian/jenkins-ci.org.key | apt-key add -',
-    before  => Exec['echo_jenkins_source'],
-  }
+    #Ubuntu
 
-  exec {'echo_jenkins_source':
-    user    => root,
-    command => "sh -c 'echo deb http://pkg.jenkins-ci.org/debian binary/ > /etc/apt/sources.list.d/jenkins.list'",
-    before  => Exec['apt_update'],
-  }
+      exec {'download_jenkins_key':
+        user    => root,
+        command => 'wget -q -O - https://jenkins-ci.org/debian/jenkins-ci.org.key | apt-key add -',
+        before  => Exec['jenkins_source'],
+      }
 
-  exec { 'apt_update':
-    user    => root,
-    command => 'apt-get update',
-    before  => Package['jenkins'],
+      exec {'jenkins_source':
+        user    => root,
+        command => "sh -c 'echo deb http://pkg.jenkins-ci.org/debian binary/ > /etc/apt/sources.list.d/jenkins.list'",
+        before  => Exec['jenkins_update'],
+      }
+
+      exec { 'jenkins_update':
+        user    => root,
+        command => 'apt-get update',
+        before  => Package['jenkins'],
+      }
+
+  }elsif $operatingsystem == 'CentOS' {
+
+    #CentOS
+
+      exec {'download_jenkins_key':
+        user    => root,
+        command => 'wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat/jenkins.repo',
+        before  => Exec['jenkins_source'],
+      }
+    
+      exec {'jenkins_source':
+        user    => root,
+        command => "rpm --import https://jenkins-ci.org/redhat/jenkins-ci.org.key",
+        before  => Exec['jenkins_update'],
+      }
+    
+      exec { 'jenkins_update':
+        user    => root,
+        command => 'yum update',
+        before  => Package['jenkins'],
+      }
+    
+  }else {
+    warning( 'Operating System is not supported.' )
   }
 
   package { 'jenkins':
       ensure => installed,
   }
-
-
-#  exec {'install_jenkins':
-#    user    => root,
-#    command => 'apt-get install -y jenkins',
-#    timeout => 0,
-#  }
 
 }
