@@ -21,7 +21,7 @@ class jenkins {
   if ! defined(Package['wget']) {
     package { 'wget':
       ensure => installed,
-      before => Package['default-java'],
+      before => Exec['download_jenkins_key'],
     }
   }
 
@@ -33,12 +33,12 @@ class jenkins {
 
     #Ubuntu
 
-      if ! defined(Package['default-java']) {
-        package { 'default-jre':
-        ensure => installed,
-        before => Exec['download_jenkins_key'],
-        }
-      }   
+  #    if ! defined(Package['default-java']) {
+  #      package { 'default-jre':
+  #      ensure => installed,
+  #      before => Exec['download_jenkins_key'],
+  #      }
+  #    }   
 
       exec {'download_jenkins_key':
         user    => root,
@@ -62,12 +62,12 @@ class jenkins {
 
     #CentOS
 
-      if ! defined(Package['java-1.7.0-openjdk']) {
-        package { 'java-1.7.0-openjdk':
-          ensure => installed,
-          before => Exec['download_jenkins_key'],
-        }
-      }   
+  #    if ! defined(Package['java-1.7.0-openjdk']) {
+  #      package { 'java-1.7.0-openjdk':
+  #        ensure => installed,
+  #        before => Exec['download_jenkins_key'],
+  #      }
+  #    }   
 
       exec {'download_jenkins_key':
         user    => root,
