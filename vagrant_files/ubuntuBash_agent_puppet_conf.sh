@@ -13,7 +13,7 @@ sudo echo 'rundir=/var/run/puppet' >> /etc/puppet/puppet.conf
 sudo echo 'factpath=$vardir/lib/facter' >> /etc/puppet/puppet.conf
 sudo echo 'templatedir=$confdir/templates' >> /etc/puppet/puppet.conf
 sudo echo 'prerun_command=/etc/puppet/etckeeper-commit-pre' >> /etc/puppet/puppet.conf
-sudo echo 'postrun_command=/etc/puppet/etckeeper-comit-post' >> /etc/puppet/puppet.conf
+sudo echo 'postrun_command=/etc/puppet/etckeeper-commit-post' >> /etc/puppet/puppet.conf
 sudo echo '' >> /etc/puppet/puppet.conf
 sudo echo '[master]' >> /etc/puppet/puppet.conf
 sudo echo '# These are needed when the puppetmaster is run by passenger' >> /etc/puppet/puppet.conf
@@ -23,5 +23,7 @@ sudo echo 'ssl_client_verify_header = SSL_CLIENT_VERIFY' >> /etc/puppet/puppet.c
 
 sudo echo '[agent]' >> /etc/puppet/puppet.conf
 sudo echo 'runinterval = 5m' >> /etc/puppet/puppet.conf
+sudo echo 'reporting = true' >> /etc/puppet/puppet.conf
+
 
 exit

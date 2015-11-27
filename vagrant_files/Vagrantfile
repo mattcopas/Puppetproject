@@ -85,7 +85,7 @@ Vagrant.configure(2) do |config|
       # configures VM
       cluster_4.vm.provider :virtualbox do |c4|
         c4.memory = 2048
-        c4.name   = "Cluster 4 Agent-Manual testing"
+        c4.name   = "Cluster 4 Agent"
         c4.gui    = true
       end
     # executes shell file to run bash terminal and comands
