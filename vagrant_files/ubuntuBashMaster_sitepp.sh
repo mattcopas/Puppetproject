@@ -11,6 +11,7 @@ echo '  include git' >> /etc/puppet/manifests/site.pp
 echo '  include maven' >> /etc/puppet/manifests/site.pp
 #echo '  include jenkins' >> /etc/puppet/manifests/site.pp
 #echo '  include jira' >> /etc/puppet/manifests/site.pp
+#echo '  include nexus' >> /etc/puppet/manifests/site.pp
 echo '}' >> /etc/puppet/manifests/site.pp
 
 echo "node 'agent2Evilcorp.evilcorp.com' { " >> /etc/puppet/manifests/site.pp

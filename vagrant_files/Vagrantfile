@@ -22,6 +22,8 @@ Vagrant.configure(2) do |config|
     cluster_1_Master.vm.provision :shell, path: "ubuntuBashMaster_git.sh"
     # creates the site.pp file EDIT WHEN ADDING NEW VMs
     cluster_1_Master.vm.provision :shell, path: "ubuntuBashMaster_sitepp.sh"
+    # restart puppetmaster service to reload interval config
+    cluster_1_Master.vm.provision :shell, path: "ubuntuBashMaster_service_restart.sh"
 
   end
 
@@ -48,6 +50,8 @@ Vagrant.configure(2) do |config|
     cluster_2.vm.provision :shell, path: "ubuntuBash_enable.sh"
     # initial pull of modules from master NOTE: BREAKS VAGRANT UP NEW CONF FILE IS THE FIX ^^
     #cluster_2.vm.provision :shell, path: "ubuntuBash_firstrun.sh"
+    # restart the service to load the new runinterval
+    #cluster_2.vm.provision :shell, path: "ubuntuBash_service_restart.sh"
 
   end
 
@@ -74,6 +78,8 @@ Vagrant.configure(2) do |config|
     cluster_3.vm.provision :shell, path: "centOSBash_enable.sh"
     # initial pull of modules from master  NOTE: BREAKS VAGRANT UP NEW CONF FILE IS THE FIX ^^
 #    cluster_3.vm.provision :shell, path: "centOSBash_firstrun.sh"
+    # restart the service to load the new runinterval
+    cluster_3.vm.provision :shell, path: "centOSBash_service_restart.sh"
 
   end
 
@@ -100,6 +106,8 @@ Vagrant.configure(2) do |config|
     cluster_4.vm.provision :shell, path: "ubuntuBash_enable.sh"
     # initial pull of modules from master NOTE: BREAKS VAGRANT UP NEW CONF FILE IS THE FIX ^^
 #    cluster_4.vm.provision :shell, path: "ubuntuBash_firstrun.sh"
+    # restart the service to load the new runinterval
+    cluster_4.vm.provision :shell, path: "ubuntuBash_service_restart.sh"
 
   end
 
