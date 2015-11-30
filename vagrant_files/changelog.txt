@@ -1,3 +1,6 @@
+Version 1.2.2
+  - disabled prerun and postrun puppet.conf commands. They were breaking the puppet run as etckeeper is not installed and configured for VCS of /etc/
+
 Version 1.2.1
   - Fixed CentOS script incorrectly echo'ed an invalid parameter to the puppet.conf file.
 

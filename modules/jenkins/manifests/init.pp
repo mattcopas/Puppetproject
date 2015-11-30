@@ -18,12 +18,12 @@ class jenkins {
   #Below are the packages needed in order for jenkins to be installed
   #------------------------------------------------------------------
 
-  if ! defined(Package['wget']) {
-    package { 'wget':
-      ensure => installed,
-      before => Exec['download_jenkins_key'],
-    }
-  }
+ # if ! defined(Package['wget']) {
+ #   package { 'wget':
+ #     ensure => installed,
+ #     before => Exec['download_jenkins_key'],
+ #   }
+ # }
 
   #------------------------------------------------------------------
   #Executables

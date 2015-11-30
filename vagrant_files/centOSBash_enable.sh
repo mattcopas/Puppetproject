@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
 # enables the server connection
-puppet agent --enable
+puppet agent --enable -v

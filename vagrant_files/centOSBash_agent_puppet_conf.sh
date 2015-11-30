@@ -11,8 +11,8 @@ echo 'ssldir=/var/lib/puppet/ssl' >> /etc/puppet/puppet.conf
 echo 'rundir=/var/run/puppet' >> /etc/puppet/puppet.conf
 echo 'factpath=$vardir/lib/facter' >> /etc/puppet/puppet.conf
 echo 'templatedir=$confdir/templates' >> /etc/puppet/puppet.conf
-echo 'prerun_command=/etc/puppet/etckeeper-commit-pre' >> /etc/puppet/puppet.conf
-echo 'postrun_command=/etc/puppet/etckeeper-commit-post' >> /etc/puppet/puppet.conf
+#echo 'prerun_command=/etc/puppet/etckeeper-commit-pre' >> /etc/puppet/puppet.conf
+#echo 'postrun_command=/etc/puppet/etckeeper-commit-post' >> /etc/puppet/puppet.conf
 echo '' >> /etc/puppet/puppet.conf
 echo '[master]' >> /etc/puppet/puppet.conf
 echo '# These are needed when the puppetmaster is run by passenger' >> /etc/puppet/puppet.conf
