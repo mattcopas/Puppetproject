@@ -44,24 +44,43 @@ class jira {
     before  => Exec['jira_execute'],
   }
   #this will kill any existing jira processes to free up the ports
- # exec { 'kill_jira':
+  #exec { 'kill_jira':
     # Check if jira process is running
-  #  unless  => 'pgrep -f "jira"',
-  #  command => 'pkill jira',
-  #  notify  => Exec['jira_execute'],
+    #unless  => 'pgrep -f "jira"',
+    #command => 'pkill jira',
+    #notify  => Exec['jira_execute'],
   #}
-  #this will 
+
   exec { 'jira_execute':
     # Check if jira process is running
-    #unless  => 'pgrep -f "jira"', 
+    #unless  => 'pgrep -f "jira"',
     user    => root,
     cwd     => '/opt/jirainstall/',
-    command => 'printf "\n2\n\n\n2\n8092\n8012\n\n" | ./jira.bin', #the ports may ha$
-    #before  => Service['jira'],
+    command => 'printf "\n2\n\n\n2\n8100\n8020\n\n" | ./jira.bin', #the ports may ha$
+    before  => Exec['remove_jira_lock'],
   }
 
-  #service { 'jira': This is not needed yet, maybe in the future.
+  exec { 'remove_jira_lock':
+    #delete jira lock
+    user    => root,
+    command => 'rm -rf /var/atlassian/application-data/jira/.jira-home.lock',
+    before  => Exec['disable_centos_firewall'],
+  }
+
+  #service { 'jira': #This is not needed yet, maybe in the future.
     #ensure => 'running',
   #}
 
-}
+  if $operatingsystem == 'CentOS' {
+    #if the os is centos the firewall must be stopped and disabled
+    exec { 'stop_centos_firewall':
+      user    => root,
+      command => "systemctl stop firewalld",
+      before  => Exec['disable_centos_firewall'],
+    }
+    exec { 'disable_centos_firewall':
+      user    => root,
+      command => "systemctl disable firewalld",
+    }
+  }
+} 
