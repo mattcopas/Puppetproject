@@ -24,7 +24,7 @@ class jira {
     user    => root,
     cwd     => '/opt/',
     command => 'mkdir jirainstall',
-#    before  => Exec['jira_wget'],
+    before  => Exec['jira_wget'],
   }
   #this will change to download direcotry and download jira install file
   exec { 'jira_wget':
