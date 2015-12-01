@@ -1,7 +1,10 @@
 class nexus {
   
   #
-  #	Permissions need to be changed
+  #	NOTES:
+  #  The file nexus-latest-bundle.tar.gz must be in the
+  #  /etc/puppet/modules/nexus/files/ directory
+  #  on the master server before running this script
   #
   
   # Variables
@@ -20,8 +23,16 @@ class nexus {
   
   # Steps here
   
+  # exec { 'wget_nexus':
+    # unless => 'test -f /usr/local/nexus-latest-bundle.tar.gz',
+    # cwd => '/usr/local/',
+	# command => 'wget http://www.sonatype.org/downloads/nexus-latest-bundle.tar.gz​',
+	# notify => Exec['unzip_nexus'],
+  # }
+  
   file { 'nexus_tar':
     ensure => 'file',
+	#onlyif => 'test -f puppet:///modules/nexus/nexus-latest-bundle.tar.gz',
 	source => 'puppet:///modules/nexus/nexus-latest-bundle.tar.gz',
 	path   => '/usr/local/nexus-latest-bundle.tar.gz',
 	notify => Exec['unzip_nexus'],
@@ -84,6 +95,19 @@ class nexus {
   exec { 'change_nexus_permissions':
     cwd     => '/usr/local/nexus-2.11.4-01/bin',
 	command => 'chmod a+x nexus',
+    notify => File['post_install_script'],
   }
+
+  file { 'post_install_script':
+    ensure => 'file',
+    source => 'puppet:///modules/nexus/post_install.sh',
+    path   => '/usr/local/bin/post_install.sh',
+    notify =>  Exec['post_install_run'],
+  }
+
+  exec { 'post_install_run':
+    command => '/usr/local/bin/post_install.sh',
+  }
+
   
 }
