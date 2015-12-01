@@ -51,7 +51,7 @@ Vagrant.configure(2) do |config|
     # initial pull of modules from master NOTE: BREAKS VAGRANT UP NEW CONF FILE IS THE FIX ^^
     #cluster_2.vm.provision :shell, path: "ubuntuBash_firstrun.sh"
     # restart the service to load the new runinterval
-    #cluster_2.vm.provision :shell, path: "ubuntuBash_service_restart.sh"
+    cluster_2.vm.provision :shell, path: "ubuntuBash_service_restart.sh"
 
   end
 
@@ -79,7 +79,7 @@ Vagrant.configure(2) do |config|
     # initial pull of modules from master  NOTE: BREAKS VAGRANT UP NEW CONF FILE IS THE FIX ^^
 #    cluster_3.vm.provision :shell, path: "centOSBash_firstrun.sh"
     # restart the service to load the new runinterval
-    cluster_3.vm.provision :shell, path: "centOSBash_service_restart.sh"
+    #cluster_3.vm.provision :shell, path: "centOSBash_service_restart.sh"
 
   end
 
