@@ -89,4 +89,10 @@ class jenkins {
     ensure => installed,
   }
 
+  if $operatingsystem == 'CentOS' {
+      user => root,
+      command => 'service jenkins start',
+      require => Package['jenkins'],
+    }
+
 }
