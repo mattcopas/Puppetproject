@@ -67,20 +67,27 @@ class jenkins {
   #        ensure => installed,
   #        before => Exec['download_jenkins_key'],
   #      }
-  #    }   
+  #    }
 
       exec {'download_jenkins_key':
         user    => root,
         command => 'wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat/jenkins.repo',
         before  => Exec['jenkins_source'],
       }
-    
+
       exec {'jenkins_source':
         user    => root,
         command => "rpm --import https://jenkins-ci.org/redhat/jenkins-ci.org.key",
+        before  => Exec['jenkins_update'],
+      }
+
+      exec { 'jenkins_update':
+        user    => root,
+        command => 'yum -y update',
         before  => Package['jenkins'],
       }
-    
+
+
   }else {
     warning( 'Operating System is not supported.' )
   }
@@ -89,10 +96,13 @@ class jenkins {
     ensure => installed,
   }
 
+
   if $operatingsystem == 'CentOS' {
+    exec { 'start_jenks':
       user => root,
       command => 'service jenkins start',
       require => Package['jenkins'],
     }
+	}
 
 }
