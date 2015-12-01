@@ -64,7 +64,7 @@ class jira {
     #delete jira lock
     user    => root,
     command => 'rm -rf /var/atlassian/application-data/jira/.jira-home.lock',
-    before  => Exec['disable_centos_firewall'],
+#    before  => Exec['disable_centos_firewall'],
   }
 
   #service { 'jira': #This is not needed yet, maybe in the future.
