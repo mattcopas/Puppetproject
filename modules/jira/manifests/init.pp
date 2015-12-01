@@ -12,12 +12,12 @@ class jira {
   }
 
   #this will ensure the node has wget
-  if ! defined(Package['jira-wget']) {
-    package { 'wget':
-      ensure => installed,
-      before => Exec['jira_mkdir'],
-    }
-  }
+#  if ! defined(Package['jira-wget']) {
+#    package { 'wget':
+#      ensure => installed,
+#      before => Exec['jira_mkdir'],
+#    }
+#  }
   #this will make the directory for the download
   exec { 'jira_mkdir':
     unless  => 'test -e /opt/jirainstall',
