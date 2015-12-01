@@ -57,7 +57,7 @@ Vagrant.configure(2) do |config|
 
      # sets base box CentOS for second Agent
   config.vm.define "cluster_3" do |cluster_3|
-    cluster_3.vm.box = "puphpet/centos65-x64" 
+    cluster_3.vm.box = "puppetlabs/centos-7.0-64-nocm" 
     cluster_3.vm.network "public_network", ip: "192.168.200.202"
     cluster_3.vm.hostname = "agent2Evilcorp.evilcorp.com"
       # configures VM

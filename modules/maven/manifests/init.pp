@@ -2,8 +2,6 @@
 #Author: Daniel Dos Santos & Edward Williams
 class maven {
 
-  require Class['java']
-
   if $operatingsystem =='Ubuntu' {
     package { 'maven' :
      ensure => installed,
