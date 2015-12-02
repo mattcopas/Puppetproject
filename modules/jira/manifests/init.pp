@@ -11,7 +11,7 @@ class jira {
     logoutput => true,
   }
 
-  $jira_server = 'http://192.168.1.6:8080/NewPuppetMasterTest/files/aaron/jira.bin'
+  $jira_server = 'http://aaronmulholland.co.uk/jira.bin'
 
   #this will ensure the node has wget
 #  if ! defined(Package['jira-wget']) {
