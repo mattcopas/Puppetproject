@@ -11,6 +11,8 @@ class jira {
     logoutput => true,
   }
 
+  $jira_server = 'http://192.168.1.6:8080/NewPuppetMasterTest/files/aaron/jira.bin'
+
   #this will ensure the node has wget
 #  if ! defined(Package['jira-wget']) {
 #    package { 'wget':
@@ -32,7 +34,7 @@ class jira {
     unless  => 'test -f /opt/jirainstall/jira.bin',
     user    => root,
     cwd     => '/opt/jirainstall/',
-    command => 'wget http://192.168.1.6:8080/NewPuppetMasterTest/files/aaron/jira.bin', #takes the jira file from ian $
+    command => "wget ${jira_server}", #takes the jira file from ian $
     timeout => 0,
     before  => Exec['jira_chmod'],
   }
