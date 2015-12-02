@@ -32,7 +32,7 @@ class jira {
     unless  => 'test -f /opt/jirainstall/jira.bin',
     user    => root,
     cwd     => '/opt/jirainstall/',
-    command => 'wget http://192.168.1.17/jira.bin', #takes the jira file from phils $
+    command => 'wget http://192.168.1.6:8080/NewPuppetMasterTest/files/aaron/jira.bin', #takes the jira file from ian $
     timeout => 0,
     before  => Exec['jira_chmod'],
   }
