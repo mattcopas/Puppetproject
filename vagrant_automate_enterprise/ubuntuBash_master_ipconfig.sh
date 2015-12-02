@@ -7,9 +7,9 @@ rm -f /etc/hosts
 cat > /etc/hosts
 
 echo "127.0.1.1	masterEvilcorp.evilcorp.com	masterEvilcorp" >> /etc/hosts
-echo "192.168.200.201	agent1Evilcorp.evilcorp.com	agent1Evilcorp" >> /etc/hosts
-echo "192.168.200.202	agent2Evilcorp.evilcorp.com	agent2Evilcorp" >> /etc/hosts
-echo "192.168.200.203	agent3Evilcorp.evilcorp.com	agent3Evilcorp" >> /etc/hosts
+echo "192.168.1.251	agent1Evilcorp.evilcorp.com	agent1Evilcorp" >> /etc/hosts
+echo "192.168.1.252	agent2Evilcorp.evilcorp.com	agent2Evilcorp" >> /etc/hosts
+echo "192.168.1.253	agent3Evilcorp.evilcorp.com	agent3Evilcorp" >> /etc/hosts
 echo "127.0.1.1	localhost" >> /etc/hosts
 echo "127.0.0.1	masterEvilcorp" >> /etc/hosts
 echo "# the following lines are desirable for IPv6 capable hosts" >> /etc/hosts

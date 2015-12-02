@@ -10,4 +10,4 @@ git clone  https://github.com/mattcopas/Puppetproject.git
 sudo rmdir /etc/puppet/modules
 
 # copy modules folder from repository into puppet
-sudo mv /tmp/Puppetproject/modules /etc/puppet
+sudo mv /tmp/Puppetproject/modules /etc/puppetlabs/puppet

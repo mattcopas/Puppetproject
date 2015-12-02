@@ -6,7 +6,7 @@ sudo -i
 rm -f /etc/hosts
 cat > /etc/hosts
 
-echo "192.168.200.200	masterEvilcorp.evilcorp.com	masterEvilcorp" >> /etc/hosts
+echo "192.168.1.250	masterEvilcorp.evilcorp.com	masterEvilcorp" >> /etc/hosts
 echo "127.0.1.1	agent1Evilcorp.evilcorp.com	agent1Evilcorp" >> /etc/hosts
 echo "127.0.1.1	localhost" >> /etc/hosts
 echo "127.0.0.1	agent1Evilcorp" >> /etc/hosts
