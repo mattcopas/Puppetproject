@@ -14,13 +14,15 @@ Vagrant.configure(2) do |config|
       end
     # executes shell file to run bash terminal and comands
     cluster_1_Master.vm.provision :shell, path: "ubuntuBashMaster.sh"
+	# DANIEL MABBETT - Add shell for zabbix install and config on master
+    cluster_1_Master.vm.provision :shell, path: "zabbix.sh"
     # sets master and all agent FQDN's, hostnames and IP's
     cluster_1_Master.vm.provision :shell, path: "ubuntuBash_master_ipconfig.sh"
     # modifies puppet.conf to set master autosigning of certs. NEVER USE IN PRODUCTION ENVIRONMENT
     cluster_1_Master.vm.provision :shell, path: "ubuntuBashMaster_puppet_conf.sh"
     # Pulls the repository from git and places the modules into /etc/puppet/modules
     cluster_1_Master.vm.provision :shell, path: "ubuntuBashMaster_git.sh"
-    # creates the site.pp file EDIT WHEN ADDING NEW VMs
+    # creates the site.pp file EDIT WHEN ADDING NEW VM
     cluster_1_Master.vm.provision :shell, path: "ubuntuBashMaster_sitepp.sh"
     # restart puppetmaster service to reload interval config
     cluster_1_Master.vm.provision :shell, path: "ubuntuBashMaster_service_restart.sh"
