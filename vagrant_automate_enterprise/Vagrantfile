@@ -5,7 +5,7 @@ Vagrant.configure(2) do |config|
   config.vm.define "cluster_1_Master" do |cluster_1_Master|
     cluster_1_Master.vm.box = "ubuntu/trusty64"
     cluster_1_Master.vm.network "public_network", ip: "192.168.1.250"
-    cluster_1_Master.vm.hostname = "masterEvilcorp.evilcorp.com"
+    cluster_1_Master.vm.hostname = "masterevilcorp.evilcorp.com"
       # configures VM
       cluster_1_Master.vm.provider :virtualbox do |master|
         master.memory = 4096
@@ -17,11 +17,11 @@ Vagrant.configure(2) do |config|
     # executes shell file to run bash terminal and comands
     cluster_1_Master.vm.provision :shell, path: "ubuntuBashMaster.sh"
     # modifies puppet.conf to set master autosigning of certs. NEVER USE IN PRODUCTION ENVIRONMENT
-    #cluster_1_Master.vm.provision :shell, path: "ubuntuBashMaster_puppet_conf.sh"
+    cluster_1_Master.vm.provision :shell, path: "ubuntuBashMaster_puppet_conf.sh"
     # Pulls the repository from git and places the modules into /etc/puppet/modules
-    ###cluster_1_Master.vm.provision :shell, path: "ubuntuBashMaster_git.sh"
+    cluster_1_Master.vm.provision :shell, path: "ubuntuBashMaster_git.sh"
     # creates the site.pp file EDIT WHEN ADDING NEW VMs
-    #cluster_1_Master.vm.provision :shell, path: "ubuntuBashMaster_sitepp.sh"
+    cluster_1_Master.vm.provision :shell, path: "ubuntuBashMaster_sitepp.sh"
     # restart puppetmaster service to reload interval config
     #cluster_1_Master.vm.provision :shell, path: "ubuntuBashMaster_service_restart.sh"
 
@@ -31,7 +31,7 @@ Vagrant.configure(2) do |config|
   config.vm.define "cluster_2" do |cluster_2|
     cluster_2.vm.box = "ubuntu/trusty64"
     cluster_2.vm.network "public_network", ip: "192.168.1.251"
-    cluster_2.vm.hostname = "agent1Evilcorp.evilcorp.com"
+    cluster_2.vm.hostname = "agent1evilcorp.evilcorp.com"
       # configures VM
       cluster_2.vm.provider :virtualbox do |c2|
         c2.memory = 2048
@@ -59,7 +59,7 @@ Vagrant.configure(2) do |config|
 #  config.vm.define "cluster_3" do |cluster_3|
 #    cluster_3.vm.box = "puppetlabs/centos-7.0-64-nocm" 
 #    cluster_3.vm.network "public_network", ip: "192.168.1.252"
-#    cluster_3.vm.hostname = "agent2Evilcorp.evilcorp.com"
+#    cluster_3.vm.hostname = "agent2evilcorp.evilcorp.com"
 #      # configures VM
 #      cluster_3.vm.provider :virtualbox do |c3|
 #        c3.memory = 2048
@@ -87,7 +87,7 @@ Vagrant.configure(2) do |config|
 #  config.vm.define "cluster_4" do |cluster_4|
 #    cluster_4.vm.box = "ubuntu/trusty64"
 #    cluster_4.vm.network "public_network", ip: "192.168.1.253"
-#    cluster_4.vm.hostname = "agent3Evilcorp.evilcorp.com"
+#    cluster_4.vm.hostname = "agent3evilcorp.evilcorp.com"
 #      # configures VM
 #      cluster_4.vm.provider :virtualbox do |c4|
 #        c4.memory = 2048
@@ -98,8 +98,6 @@ Vagrant.configure(2) do |config|
 #    cluster_4.vm.provision :shell, path: "ubuntuBash_agent_3_ipconfig.sh"
 #    # executes shell file to run bash terminal and comands
 #    cluster_4.vm.provision :shell, path: "ubuntuBash.sh"
-#    # sets master and current agent FQDN's, hostnames and IP's
-#    cluster_4.vm.provision :shell, path: "ubuntuBash_agent_3_ipconfig.sh"
 #    # sets the server and run interval on agent nodes
 #    cluster_4.vm.provision :shell, path: "ubuntuBash_agent_puppet_conf.sh"
 #    # create a certificate key which is sent to the server, server name in file:

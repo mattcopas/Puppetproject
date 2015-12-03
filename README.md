@@ -7,14 +7,9 @@
 1) Place vagrantfile and all .sh scripts into a folder.
 2) Navigate to this folder through git bash.
 3) Execute command 'vagrant up' and wait.
-4) Congraulations your master and agents are communicating and pulling configuration changes every 5 minutes!
+4) Congraulations your master and agents are communicating and pulling configuration changes every 5 minutes!*
 
-
-
-nexus does not work on CentOS
-jenkins must be manually started on CentOS
-
-LAN must be changed to area 200
+*nexus does not work on CentOS, jenkins must be manually started on CentOS, LAN must be changed to area 200 in order to view jenkins and jira browsers
 
 #################################
 #   VAGRANT_ENTERPRISE VERSION  #
@@ -31,7 +26,7 @@ LAN must be changed to area 200
 8) Enter the master FQDN as :
   masterevilcorp.evilcorp.com
 9) Enter another DNS alias separted by a comma :
-  masterEvilcorp
+  puppet, masterEvilcorp, masterEvilcorp.evilcorp.com
 10) Set the admin password to something memorable, hint hint netbuilder. Note superuser name is admin. 
 11) Click submit and click continue
 12) Ignore any warnings and click 'Deploy now'. NB: may be up to 30 minutes, click the page now and then so it doesn't time out. (If a warning is red click the back button twice and repeat these steps until it goes away).
@@ -43,3 +38,6 @@ LAN must be changed to area 200
 17) Well done, you're in.
 18) Wait for all other VM's to be created.
 19) From the Enterprise dashboard you can now navigate to 'Nodes' and sign certificates.
+
+4) Once the entire installation is complete the Enterprise console can be accessed at (to sign certificates and use MCollective):
+  https:// 192.168.1.250
