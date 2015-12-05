@@ -1,4 +1,4 @@
-class nexus {
+﻿class nexus {
   
   #
   #	NOTES:
@@ -102,6 +102,7 @@ class nexus {
     ensure => 'file',
     source => 'puppet:///modules/nexus/post_install.sh',
     path   => '/usr/local/bin/post_install.sh',
+    mode   => '0744',
     notify =>  Exec['post_install_run'],
   }
 
