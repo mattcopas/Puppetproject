@@ -1,0 +1,106 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# All Vagrant configuration is done below. The "2" in Vagrant.configure
+# configures the configuration version (we support older styles for
+# backwards compatibility). Please don't change it unless you know what
+# you're doing.
+Vagrant.configure(2) do |config|
+
+  # Variables
+  masterIP = "192.168.1.1"
+  masterHostName = "vagrantmaster.home"
+
+  # Every Vagrant development environment requires a box. You can search for
+  # boxes at https://atlas.hashicorp.com/search.
+  config.vm.box = "ubuntu/trusty64"
+
+  # Disable automatic box update checking. If you disable this, then
+  # boxes will only be checked for updates when the user runs
+  # `vagrant box outdated`. This is not recommended.
+  config.vm.box_check_update = false
+
+  # Share an additional folder to the guest VM. The first argument is
+  # the path on the host to the actual folder. The second argument is
+  # the path on the guest to mount the folder. And the optional third
+  # argument is a set of non-required options.
+  # config.vm.synced_folder "../data", "/vagrant_data"
+  
+    # Customize the amount of memory on the VM:
+  config.vm.provider "virtualbox" do |vb|
+    vb.memory = "512"
+    vb.cpus = "2"
+  end
+  # View the documentation for the provider you are using for more
+  # information on available options.
+
+  # Enable provisioning with a shell script. Additional provisioners such as
+  # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
+  # documentation for more information about their specific syntax and use.
+  config.vm.provision "shell", inline: <<-SHELL
+    apt-get -y update
+    apt-get install -y puppet
+    apt-get install -y facter
+  SHELL
+ 
+  config.vm.define "vagrantmaster" do |vagrantmaster|
+  	#vagrantmaster.name = "vagrantmaster"
+  	vagrantmaster.vm.network "public_network", ip: "192.168.1.1"
+  	vagrantmaster.vm.hostname = "vagrantmaster"
+  	vagrantmaster.vm.provider "virtualbox" do |vbmaster|
+      vbmaster.memory = "1024"
+      vbmaster.name = "vagrantmaster"
+  	end
+    vagrantmaster.vm.provision "shell", inline: <<-SHELL
+      apt-get -y install puppetmaster
+    SHELL
+  end
+ 
+  config.vm.define "gitagent" do |gitagent|
+  	#gitagent.name = "gitagent"
+  	gitagent.vm.network "public_network", ip: "192.168.1.2"
+  	gitagent.vm.hostname = "gitagent"
+  	gitagent.vm.provider "virtualbox" do |gitvb|
+      gitvb.name = "gitagent"
+  	end
+  end
+
+  config.vm.define "jenkinsagent" do |jenkinsagent|
+  	#jenkinsagent.name = "jenkinsagent"
+  	jenkinsagent.vm.network "public_network", ip: "192.168.1.3"
+  	jenkinsagent.vm.hostname ="jenkinsagent"
+  	jenkinsagent.vm.provider "virtualbox" do |vbjenkins|
+  		vbjenkins.name = "jenkinsagent"
+  	end
+  end
+
+ config.vm.define "jiraagent" do |jiraagent|
+ 	#jiraagent.name = "jiraagent"
+   jiraagent.vm.network "public_network", ip: "192.168.1.4"
+   jiraagent.vm.hostname = "jiraagent"
+   jiraagent.vm.provider "virtualbox" do |jiravb|
+   	jiravb.name = "jiraagent"
+   end
+ end
+
+ config.vm.define "mavenagent" do |mavenagent|
+ 	#mavenagent.name = "mavenagent"
+   mavenagent.vm.network "public_network", ip: "192.168.1.5"
+   mavenagent.vm.hostname = "mavenagent"
+   mavenagent.vm.provider "virtualbox" do |mavenvb|
+   	mavenvb.name = "mavenagent"
+   end
+ end
+
+ config.vm.define "nexusagent" do |nexusagent|
+ 	#nexusagent.name = "nexusagent"
+    nexusagent.vm.network "public_network", ip: "192.168.1.6"
+    nexusagent.vm.hostname = "nexusagent"
+    nexusagent.vm.provider "virtualbox" do |nexusvb|
+   	  nexusvb.name = "nexusagent"
+    end
+ end
+ 	
+ 
+
+end
