@@ -6,8 +6,6 @@ sudo apt-get install -y openssh-client
 sudo apt-get install -y openssh-server
 sudo apt-get install -y git
 sudo apt-get install -y tree
-#sudo apt-get install -y ubuntu-desktop
-#sudo apt-get install -y firefox
 
 # set the system time to a ntp server
 sudo ntpdate 0.uk.pool.ntp.org
@@ -18,23 +16,49 @@ sudo ufw disable
 # generate an answer file for automated enterprise install
 cd /tmp
 sudo touch answer_file.txt
-sudo echo "q_install=y" >> answer_file.txt
-sudo echo "q_vendor_packages_install=y" >> answer_file.txt
-sudo echo "q_run_updtvpkg=y" >> answer_file.txt
-sudo echo "q_puppetmaster_install=y" >> answer_file.txt
-sudo echo "q_puppetagent_install=y" >> answer_file.txt
-sudo echo "q_all_in_one_install=y" >> answer_file.txt
-sudo echo "q_puppetmaster_certname=masterevilcorp.evilcorp.com" >> answer_file.txt
-sudo echo "q_fail_on_unsuccessful_master_lookup" >> answer_file.txt
-sudo echo "q_puppetmaster_dnsaltnames=puppet,masterevilcorp,masterevilcorp.evilcorp.com" >> answer_file.txt
-sudo echo "q_pe_check_for_updates=y" >> answer_file.txt
-sudo echo "q_puppet_enterpriseconsole_httpd_port=443" >> answer_file.txt
-sudo echo "q_puppet_enterpriseconsole_auth_password=netbuilder" >> answer_file.txt
-sudo echo "q_puppetdb_install=y" >> answer_file.txt
-sudo echo "q_puppetdb_database_name=pe-puppetdb" >> answer_file.txt
-sudo echo "q_puppetdb_database_password=netbuilder" >> answer_file.txt
-sudo echo "q_puppetdb_database_user=admin" >> answer_file.txt
-sudo echo "q_puppetdb_hostname=masterevilcorp.evilcorp.com" >> answer_file.txt
+sudo echo "q_activity_database_name='pe-activity'" >> answer_file.txt
+sudo echo "q_activity_database_password='netbuilder'" >> answer_file.txt
+sudo echo "q_activity_database_user='pe-activity'" >> answer_file.txt
+sudo echo "q_all_in_one_install='y'" >> answer_file.txt
+sudo echo "q_classifier_database_name='pe-classifier'" >> answer_file.txt
+sudo echo "q_classifier_database_password='netbuilder'" >> answer_file.txt
+sudo echo "q_classifier_database_user='pe-classifier'" >> answer_file.txt
+sudo echo "q_database_host='masterevilcorp.evilcorp.com'" >> answer_file.txt
+sudo echo "q_database_install='y'" >> answer_file.txt
+sudo echo "q_database_port='5432'" >> answer_file.txt
+sudo echo "q_database_root_password='netbuilder'" >> answer_file.txt
+sudo echo "q_database_root_user='root'" >> answer_file.txt
+sudo echo "q_fail_on_unsuccessful_master_lookup='y'" >> answer_file.txt
+sudo echo "q_install='y'" >> answer_file.txt
+sudo echo "q_pe_check_for_updates='y'" >> answer_file.txt
+sudo echo "q_pe_database='y'" >> answer_file.txt
+sudo echo "q_public_hostname='masterevilcorp.evilcorp.com'" >> answer_file.txt
+sudo echo "q_puppet_cloud_install='y'" >> answer_file.txt
+sudo echo "q_puppet_enterpriseconsole_auth_password='netbuilder'" >> answer_file.txt
+sudo echo "q_puppet_enterpriseconsole_httpd_port='443'" >> answer_file.txt
+sudo echo "q_puppet_enterpriseconsole_install='y'" >> answer_file.txt
+sudo echo "q_puppet_enterpriseconsole_master_hostname='masterevilcorp.evilcorp.com'" >> answer_file.txt
+sudo echo "q_puppetagent_certname='masterevilcorp.evilcorp.com'" >> answer_file.txt
+sudo echo "q_puppetagent_install='y'" >> answer_file.txt
+sudo echo "q_puppetagent_server='masterevilcorp.evilcorp.com'" >> answer_file.txt
+sudo echo "q_puppetdb_database_name='pe-puppetdb'" >> answer_file.txt
+sudo echo "q_puppetdb_database_password='netbuilder'" >> answer_file.txt
+sudo echo "q_puppetdb_database_user='pe-puppetdb'" >> answer_file.txt
+sudo echo "q_puppetdb_hostname='masterevilcorp.evilcorp.com'" >> answer_file.txt
+sudo echo "q_puppetdb_install='y'" >> answer_file.txt
+sudo echo "q_puppetdb_plaintext_port='8080'" >> answer_file.txt
+sudo echo "q_puppetdb_port='8081'" >> answer_file.txt
+sudo echo "q_puppetmaster_certname='masterevilcorp.evilcorp.com'" >> answer_file.txt
+sudo echo "q_puppetmaster_dnsaltnames='puppet,masterevilcorp,masterevilcorp.evilcorp.com'" >> answer_file.txt
+sudo echo "q_puppetmaster_enterpriseconsole_hostname='masterevilcorp.evilcorp.com'" >> answer_file.txt
+sudo echo "q_puppetmaster_enterpriseconsole_port='443'" >> answer_file.txt
+sudo echo "q_puppetmaster_install='y'" >> answer_file.txt
+sudo echo "q_rbac_database_name='pe-rbac'" >> answer_file.txt
+sudo echo "q_rbac_database_password='netbuilder'" >> answer_file.txt
+sudo echo "q_rbac_database_user='pe-rbac'" >> answer_file.txt
+sudo echo "q_skip_backup='y'" >> answer_file.txt
+sudo echo "q_skip_master_verification='n'" >> answer_file.txt
+sudo echo "q_vendor_packages_install='y'" >> answer_file.txt
 
 # enterprise installation
 cd /tmp

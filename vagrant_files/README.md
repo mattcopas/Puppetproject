@@ -1,11 +1,15 @@
-USER GUIDE
-  Place files (Vagrantfile, .sh files) inside a folder on your desktop.
-  Use the git bash terminal to navigate inside this folder
-  Exeucute 'vagrant up' from bash to apply the 4 VM's with preconfigured scripts*
+###########################
+#   VAGRANT_FILE VERSION  #
+###########################
 
+1) Place vagrantfile and all .sh scripts into a folder.
+2) Navigate to this folder through git bash.
+3) Execute command 'vagrant up' and wait.
+4) Congraulations your master and agents are communicating and pulling configuration changes every 5 minutes!*
+
+*nexus does not work on CentOS, jenkins must be manually started on CentOS, LAN must be changed to area 200 in order to view jenkins and jira browsers
+
+For VM machine access:
   The login name is 'Vagrant'
   The login password is 'vagrant'
-
-
-  * NOTE: vagrant must be installed on your system
-
+  Toa ccess CentOS machine inside git bash type: 'vagrant ssh cluster_3'

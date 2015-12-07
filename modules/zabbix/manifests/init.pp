@@ -4,7 +4,7 @@
 
 class zabbix {
 
-  $zabip = $serverip
+  $zabip = $::ipaddress_eth1
   $zabhost = $::fqdn
 
   #----------------------------------------------------------------

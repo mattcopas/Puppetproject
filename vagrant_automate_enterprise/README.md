@@ -1,11 +1,12 @@
-USER GUIDE
-  Place files (Vagrantfile, .sh files) inside a folder on your desktop.
-  Use the git bash terminal to navigate inside this folder
-  Exeucute 'vagrant up' from bash to apply the 4 VM's with preconfigured scripts*
+#################################
+#   VAGRANT_ENTERPRISE VERSION  #
+#################################
 
-  The login name is 'Vagrant'
-  The login password is 'vagrant'
-
-
-  * NOTE: vagrant must be installed on your system
-
+1) Place vagrantfile and all .sh scripts into a folder.
+2) Navigate to this folder through git bash.
+3) Execute command 'vagrant up' and wait.
+4) Once the entire installation is complete the Enterprise console can be accessed at (to sign certificates and use MCollective):
+  https:// 192.168.1.250
+5) Or to sign certificates log onto the master VM and execute 'sudo puppet cert sign --all' 
+6) To access zabbix go to '192.168.1.250/zabbix'
+  User = admin, Password = zabbix

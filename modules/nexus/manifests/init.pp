@@ -23,20 +23,20 @@
   
   # Steps here
   
-  # exec { 'wget_nexus':
-    # unless => 'test -f /usr/local/nexus-latest-bundle.tar.gz',
-    # cwd => '/usr/local/',
-	# command => 'wget http://www.sonatype.org/downloads/nexus-latest-bundle.tar.gz​',
-	# notify => Exec['unzip_nexus'],
-  # }
+   exec { 'wget_nexus':
+     unless => 'test -f /usr/local/nexus-latest-bundle.tar.gz',
+     cwd => '/usr/local/',
+	 command => 'wget http://192.168.1.6:8080/downloads/nexus-latest-bundle.tar.gz',
+	 notify => Exec['unzip_nexus'],
+   }
   
-  file { 'nexus_tar':
-    ensure => 'file',
-	#onlyif => 'test -f puppet:///modules/nexus/nexus-latest-bundle.tar.gz',
-	source => 'puppet:///modules/nexus/nexus-latest-bundle.tar.gz',
-	path   => '/usr/local/nexus-latest-bundle.tar.gz',
-	notify => Exec['unzip_nexus'],
-  }
+#  file { 'nexus_tar':
+#    ensure => 'file',
+	# #onlyif => 'test -f puppet:///modules/nexus/nexus-latest-bundle.tar.gz',
+	# source => 'puppet:///modules/nexus/nexus-latest-bundle.tar.gz',
+	# path   => '/usr/local/nexus-latest-bundle.tar.gz',
+	# notify => Exec['unzip_nexus'],
+ #  }
   
   exec { 'unzip_nexus':
     cwd    => '/usr/local',

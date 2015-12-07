@@ -16,6 +16,8 @@ Vagrant.configure(2) do |config|
     cluster_1_Master.vm.provision :shell, path: "ubuntuBash_master_ipconfig.sh"
     # executes shell file to run bash terminal and comands
     cluster_1_Master.vm.provision :shell, path: "ubuntuBashMaster.sh"
+    # install Zabbix on master
+    cluster_1_Master.vm.provision :shell, path: "zabbix.sh"
     # modifies puppet.conf to set master autosigning of certs. NEVER USE IN PRODUCTION ENVIRONMENT
     cluster_1_Master.vm.provision :shell, path: "ubuntuBashMaster_puppet_conf.sh"
     # Pulls the repository from git and places the modules into /etc/puppet/modules
@@ -84,24 +86,24 @@ Vagrant.configure(2) do |config|
 #  end
 
         # sets base box Ubuntu for third Agent
-#  config.vm.define "cluster_4" do |cluster_4|
-#    cluster_4.vm.box = "ubuntu/trusty64"
-#    cluster_4.vm.network "public_network", ip: "192.168.1.253"
-#    cluster_4.vm.hostname = "agent3evilcorp.evilcorp.com"
-#      # configures VM
-#      cluster_4.vm.provider :virtualbox do |c4|
-#        c4.memory = 2048
-#        c4.name   = "Cluster 4 Agent"
-#        c4.gui    = true
-#      end
-#    # sets master and current agent FQDN's, hostnames and IP's
-#    cluster_4.vm.provision :shell, path: "ubuntuBash_agent_3_ipconfig.sh"
-#    # executes shell file to run bash terminal and comands
-#    cluster_4.vm.provision :shell, path: "ubuntuBash.sh"
-#    # sets the server and run interval on agent nodes
-#    cluster_4.vm.provision :shell, path: "ubuntuBash_agent_puppet_conf.sh"
-#    # create a certificate key which is sent to the server, server name in file:
-#    cluster_4.vm.provision :shell, path: "ubuntuBash_puppet_cert_gen.sh"
+  config.vm.define "cluster_4" do |cluster_4|
+    cluster_4.vm.box = "ubuntu/trusty64"
+    cluster_4.vm.network "public_network", ip: "192.168.1.253"
+    cluster_4.vm.hostname = "agent3evilcorp.evilcorp.com"
+      # configures VM
+      cluster_4.vm.provider :virtualbox do |c4|
+        c4.memory = 2048
+        c4.name   = "Cluster 4 Agent"
+        c4.gui    = true
+      end
+    # sets master and current agent FQDN's, hostnames and IP's
+    cluster_4.vm.provision :shell, path: "ubuntuBash_agent_3_ipconfig.sh"
+    # executes shell file to run bash terminal and comands
+    cluster_4.vm.provision :shell, path: "ubuntuBash.sh"
+#   # sets the server and run interval on agent nodes
+    cluster_4.vm.provision :shell, path: "ubuntuBash_agent_puppet_conf.sh"
+    # create a certificate key which is sent to the server, server name in file:
+    cluster_4.vm.provision :shell, path: "ubuntuBash_puppet_cert_gen.sh"
 #    # enables agent
 #    cluster_4.vm.provision :shell, path: "ubuntuBash_enable.sh"
 #    # initial pull of modules from master NOTE: BREAKS VAGRANT UP NEW CONF FILE IS THE FIX ^^
@@ -109,6 +111,6 @@ Vagrant.configure(2) do |config|
 #    # restart the service to load the new runinterval
 #    cluster_4.vm.provision :shell, path: "ubuntuBash_service_restart.sh"
 
-#  end
+  end
 
 end

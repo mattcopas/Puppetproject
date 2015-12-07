@@ -18,26 +18,10 @@
 1) Place vagrantfile and all .sh scripts into a folder.
 2) Navigate to this folder through git bash.
 3) Execute command 'vagrant up' and wait.
-4) When prompted open a browser window and enter the address :
-  https://192.168.1.250:3000
-5) Accept the security cert.
-6) Click the start button.
-7) Select the Monolithic install
-8) Enter the master FQDN as :
-  masterevilcorp.evilcorp.com
-9) Enter another DNS alias separted by a comma :
-  puppet, masterEvilcorp, masterEvilcorp.evilcorp.com
-10) Set the admin password to something memorable, hint hint netbuilder. Note superuser name is admin. 
-11) Click submit and click continue
-12) Ignore any warnings and click 'Deploy now'. NB: may be up to 30 minutes, click the page now and then so it doesn't time out. (If a warning is red click the back button twice and repeat these steps until it goes away).
-13)Once ready click 'Start using Puppet Enterprise'
-14) Open the awful firefox browser on the Linux machine. 
-15) Enter the URL as :
-  https://masterevilcorp.evilcorp.com
-16) If it fails just repeat the step over and over until it gives a certifcate warning. Accept the cert.
-17) Well done, you're in.
-18) Wait for all other VM's to be created.
-19) From the Enterprise dashboard you can now navigate to 'Nodes' and sign certificates.
-
 4) Once the entire installation is complete the Enterprise console can be accessed at (to sign certificates and use MCollective):
   https:// 192.168.1.250
+5) Or to sign certificates log onto the master VM and execute 'sudo puppet cert sign --all' 
+6) To access zabbix go to '192.168.1.250/zabbix'
+  User = admin, Password = zabbix
+7) On the masterm start the Zabbix server with: 'sudo service zabbix-server start'
+8) On the master turn the zabbix agent on: 'sudo service zabbix-agent start)'

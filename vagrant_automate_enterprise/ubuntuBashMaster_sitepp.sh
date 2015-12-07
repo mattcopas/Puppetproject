@@ -6,31 +6,41 @@ sudo touch /etc/puppetlabs/code/environments/production/manifests/site.pp
 
 # adding nodes to site.pp
 
-echo "node 'agent1Evilcorp.evilcorp.com' inherits default { " >> /etc/puppetlabs/code/environments/production/manifests/site.pp
+echo "node 'agent1Evilcorp.evilcorp.com' { " >> /etc/puppetlabs/code/environments/production/manifests/site.pp
+echo '  include tools' >> /etc/puppetlabs/code/environments/production/manifests/site.pp
+echo '  include git' >> /etc/puppetlabs/code/environments/production/manifests/site.pp
 echo '  include java' >> /etc/puppetlabs/code/environments/production/manifests/site.pp
 echo '  include maven' >> /etc/puppetlabs/code/environments/production/manifests/site.pp
 echo '  include jenkins' >> /etc/puppetlabs/code/environments/production/manifests/site.pp
 echo '  include jira' >> /etc/puppetlabs/code/environments/production/manifests/site.pp
 echo '  include nexus' >> /etc/puppetlabs/code/environments/production/manifests/site.pp
+#echo '  include zabbix' >> /etc/puppetlabs/code/environments/production/manifests/site.pp
 echo '}' >> /etc/puppetlabs/code/environments/production/manifests/site.pp
 
-echo "node 'agent2Evilcorp.evilcorp.com' inherits default { " >> /etc/puppetlabs/code/environments/production/manifests/site.pp
+echo "node 'agent2Evilcorp.evilcorp.com' { " >> /etc/puppetlabs/code/environments/production/manifests/site.pp
+echo '  include tools' >> /etc/puppetlabs/code/environments/production/manifests/site.pp
+echo '  include git' >> /etc/puppetlabs/code/environments/production/manifests/site.pp
 echo '  include java' >> /etc/puppetlabs/code/environments/production/manifests/site.pp
 echo '  include maven' >> /etc/puppetlabs/code/environments/production/manifests/site.pp
 echo '  include jenkins' >> /etc/puppetlabs/code/environments/production/manifests/site.pp
 echo '  include jira' >> /etc/puppetlabs/code/environments/production/manifests/site.pp
+echo '  include zabbix' >> /etc/puppetlabs/code/environments/production/manifests/site.pp
 #echo '  include nexus' >> /etc/puppetlabs/code/environments/production/manifests/site.pp
 echo '}' >> /etc/puppetlabs/code/environments/production/manifests/site.pp
 
-echo "node 'agent3Evilcorp.evilcorp.com' inherits default { " >> /etc/puppetlabs/code/environments/production/manifests/site.pp
+echo "node 'agent3Evilcorp.evilcorp.com' { " >> /etc/puppetlabs/code/environments/production/manifests/site.pp
+echo '  include tools' >> /etc/puppetlabs/code/environments/production/manifests/site.pp
+echo '  include git' >> /etc/puppetlabs/code/environments/production/manifests/site.pp
 echo '  include java' >> /etc/puppetlabs/code/environments/production/manifests/site.pp
 echo '  include maven' >> /etc/puppetlabs/code/environments/production/manifests/site.pp
 #echo '  include jenkins' >> /etc/puppetlabs/code/environments/production/manifests/site.pp
 #echo '  include jira' >> /etc/puppetlabs/code/environments/production/manifests/site.pp
+echo '  include zabbix' >> /etc/puppetlabs/code/environments/production/manifests/site.pp
 #echo '  include nexus' >> /etc/puppetlabs/code/environments/production/manifests/site.pp
 echo '}' >> /etc/puppetlabs/code/environments/production/manifests/site.pp
 
 echo "node default { " >> /etc/puppetlabs/code/environments/production/manifests/site.pp
 echo '  include tools' >> /etc/puppetlabs/code/environments/production/manifests/site.pp
 echo '  include git' >> /etc/puppetlabs/code/environments/production/manifests/site.pp
+echo '  include zabbix' >> /etc/puppetlabs/code/environments/production/manifests/site.pp
 echo '}' >> /etc/puppetlabs/code/environments/production/manifests/site.pp
