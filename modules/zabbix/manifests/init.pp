@@ -31,11 +31,10 @@ class zabbix {
     exec {'install_agent_prezabbix_update':
       user    => root,
       command => 'apt-get update',
-      before  => Package['install_agent_zabbix_software'],
+      before  => Package['zabbix-agent'],
     }
 
-    package {'install_agent_zabbix_software':
-      user    => root,
+    package {'zabbix-agent':
       ensure  => 'present',
       before  => Exec['edit_zabbix_server'],
     }
