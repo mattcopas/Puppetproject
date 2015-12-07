@@ -31,12 +31,12 @@ class zabbix {
     exec {'install_agent_prezabbix_update':
       user    => root,
       command => 'apt-get update',
-      before  => Exec['install_agent_zabbix_software'],
+      before  => Package['install_agent_zabbix_software'],
     }
 
-    exec {'install_agent_zabbix_software':
+    package {'install_agent_zabbix_software':
       user    => root,
-      command => 'apt-get install -y zabbix-agent',
+      ensure  => 'present',
       before  => Exec['edit_zabbix_server'],
     }
 
@@ -48,7 +48,7 @@ class zabbix {
   
     exec {'edit_zabbix_hostname':
       user    => root,
-      command => "sed -i 's/Hostname=Zabbix server/Hostname=${zabhost}' /etc/zabbix/zabbix_agentd.conf",
+      command => "sed -i 's/Hostname=Zabbix server/Hostname=${zabhost}/' /etc/zabbix/zabbix_agentd.conf",
       before  => Exec['update_zabbix_config_files'],
     }
   
