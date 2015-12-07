@@ -42,13 +42,13 @@ class zabbix {
 
     exec {'edit_zabbix_server':
       user    => root,
-      command => "sed -i '85s/.*/Server=$masterip/' /etc/zabbix/zabbix_agentd.conf",
+      command => "sed -i 's/Server=127.0.0.1/Server=${masterip}/' /etc/zabbix/zabbix_agentd.conf",
       before  => Exec['edit_zabbix_hostname'],
     }
   
     exec {'edit_zabbix_hostname':
       user    => root,
-      command => "sed -i '137s/.*/Hostname=$zabhost/' /etc/zabbix/zabbix_agentd.conf",
+      command => "sed -i 's/Hostname=Zabbix server/Hostname=${zabhost}' /etc/zabbix/zabbix_agentd.conf",
       before  => Exec['update_zabbix_config_files'],
     }
   

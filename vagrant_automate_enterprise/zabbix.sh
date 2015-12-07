@@ -54,3 +54,6 @@ cp /usr/share/doc/zabbix-frontend-php/examples/apache.conf /etc/apache2/conf-ava
 a2enconf zabbix.conf
 
 service apache2 reload
+
+sudo service zabbix-server start
+sudo service zabbix-agent start

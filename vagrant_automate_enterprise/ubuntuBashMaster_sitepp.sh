@@ -13,8 +13,8 @@ echo '  include java' >> /etc/puppetlabs/code/environments/production/manifests/
 echo '  include maven' >> /etc/puppetlabs/code/environments/production/manifests/site.pp
 echo '  include jenkins' >> /etc/puppetlabs/code/environments/production/manifests/site.pp
 echo '  include jira' >> /etc/puppetlabs/code/environments/production/manifests/site.pp
-echo '  include nexus' >> /etc/puppetlabs/code/environments/production/manifests/site.pp
-#echo '  include zabbix' >> /etc/puppetlabs/code/environments/production/manifests/site.pp
+#echo '  include nexus' >> /etc/puppetlabs/code/environments/production/manifests/site.pp
+echo '  include zabbix' >> /etc/puppetlabs/code/environments/production/manifests/site.pp
 echo '}' >> /etc/puppetlabs/code/environments/production/manifests/site.pp
 
 echo "node 'agent2Evilcorp.evilcorp.com' { " >> /etc/puppetlabs/code/environments/production/manifests/site.pp
