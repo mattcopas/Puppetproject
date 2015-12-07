@@ -56,4 +56,3 @@ a2enconf zabbix.conf
 service apache2 reload
 
 sudo service zabbix-server start
-sudo service zabbix-agent start
