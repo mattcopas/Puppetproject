@@ -4,6 +4,7 @@
 
 class zabbix {
 
+  $masterip = '192.168.1.250'
   $zabip = $::ipaddress_eth1
   $zabhost = $::fqdn
 
@@ -41,7 +42,7 @@ class zabbix {
 
     exec {'edit_zabbix_server':
       user    => root,
-      command => "sed -i '85s/.*/Server=$zabip/' /etc/zabbix/zabbix_agentd.conf",
+      command => "sed -i '85s/.*/Server=$masterip/' /etc/zabbix/zabbix_agentd.conf",
       before  => Exec['edit_zabbix_hostname'],
     }
   
